@@ -202,7 +202,10 @@ resource "aws_instance" "myT-Ec2" {
   ami               = "ami-084568db4383264d4"
   instance_type     = "t2.micro"
   key_name          = "us-east-1"
-  network_interface_ids = [aws_network_interface.My-NIC.id]
+  network_interface {
+    network_interface_id = aws_network_interface.My-NIC.id
+    device_index         = 0
+  }
 
   user_data = <<-EOF
   #!/bin/bash
